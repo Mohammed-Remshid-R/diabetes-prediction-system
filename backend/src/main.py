@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import joblib
 import numpy as np
@@ -83,3 +85,14 @@ def predict(data: DiabetesInput):
         "prediction": int(prediction),
         "probability": float(probability)
     }
+
+# Serve React Frontend
+app.mount(
+    "/assets",
+    StaticFiles(directory="../../frontend/dist/assets"),
+    name="assets"
+)
+
+@app.get("/{full_path:path}")
+async def serve_frontend(full_path: str):
+    return FileResponse("../../frontend/dist/index.html")
