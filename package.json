@@ -1,0 +1,13 @@
+{
+  "name": "diabetes_prediction_system",
+  "version": "1.0.0",
+  "description": "Full-stack Clinical Diabetes Prediction System",
+  "scripts": {
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && python -m uvicorn src.main:app --reload",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
